@@ -19,24 +19,18 @@ const logout = () => {
 }
 
 const cerebry = async () => {
-  //10204200900201
   loading.value = true
-  const pin = '10204200900201'
-  await axios(import.meta.env.VITE_PISA_API_URL + `/user/${pin}/token/`, {
-    method: 'GET',
-    mode: 'no-cors',
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-      'jwt-token': import.meta.env.VITE_PISA_API_TOKEN,
-    },
-    withCredentials: true,
-    credentials: 'same-origin',
-  })
+  await axios.get(import.meta.env.VITE_PISA_API_URL + `/cerebry/${config.studentId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'jwt-token': import.meta.env.VITE_PISA_API_TOKEN,
+        },
+      })
       .then(resp => {
+        console.log(resp)
         const token = resp.data?.token || ''
         if (token.startsWith('ey')) {
-          window.location.replace('https://student.cerebry.co/?auth_tok=asdfafas' + token)
+          window.location.replace('https://student.cerebry.co/?auth_tok=' + token)
         } else {
           toastEvent('error', 'dont-have-access', 'please-contact-your-teacher', 6000)
         }

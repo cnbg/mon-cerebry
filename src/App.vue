@@ -28,7 +28,7 @@ onBeforeMount(() => {
 <template>
   <RouterView />
   <Teleport to="body">
-    <Toast position="bottom-right" />
+    <Toast position="top-right" />
     <ConfirmDialog />
     <div v-if="dev" class="flex items-center gap-3 bottom-8 left-7 fixed z-50">
       <SelectButton v-model="$i18n.locale" :allow-empty="false"
