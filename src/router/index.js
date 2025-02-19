@@ -13,6 +13,8 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to) => {})
+router.beforeEach((to) => {
+  if (to.name !== 'login' && !localStorage.getItem('studentid')) return {name: 'login'}
+})
 
 export default router

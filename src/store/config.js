@@ -78,13 +78,13 @@ export const useConfigStore = defineStore('config', {
       await localStorage.setItem('token', '')
     },
     async setProfile(data) {
-      this.pin = data?.pin || localStorage.getItem('pin') || this.pin
-      this.firstName = data?.first_name || localStorage.getItem('first-name') || this.firstName
-      this.lastName = data?.last_name || localStorage.getItem('last-name') || this.lastName
-      this.email = data?.email || localStorage.getItem('email') || this.email
-      this.phone = data?.phone || localStorage.getItem('phone') || this.phone
-      this.birthdate = data?.birthdate || localStorage.getItem('birthdate') || this.birthdate
-      this.studentId = data?.studentId || localStorage.getItem('student-id') || this.studentId
+      this.pin = data?.pin ?? localStorage.getItem('pin') ?? this.pin
+      this.firstName = data?.first_name ?? localStorage.getItem('firstname') ?? this.firstName
+      this.lastName = data?.last_name ?? localStorage.getItem('lastname') ?? this.lastName
+      this.email = data?.email ?? localStorage.getItem('email') ?? this.email
+      this.phone = data?.phone ?? localStorage.getItem('phone') ?? this.phone
+      this.birthdate = data?.birthdate ?? localStorage.getItem('birthdate') ?? this.birthdate
+      this.studentId = data?.studentId ?? localStorage.getItem('studentid') ?? this.studentId
 
       await localStorage.setItem('pin', this.pin)
       await localStorage.setItem('firstname', this.firstName)
