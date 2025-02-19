@@ -23,10 +23,10 @@ const cerebry = async () => {
   loading.value = true
   const pin = '10204200900201'
   await axios.get(import.meta.env.VITE_PISA_API_URL + `/user/${pin}/token/`, {
+        withCredentials: false,
         headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+          "Cache-Control": "no-cache",
+          "Access-Control-Allow-Origin": "*",
           'jwt-token': import.meta.env.VITE_PISA_API_TOKEN,
         },
       })
