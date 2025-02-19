@@ -22,14 +22,17 @@ const cerebry = async () => {
   //10204200900201
   loading.value = true
   const pin = '10204200900201'
-  await axios.get(import.meta.env.VITE_PISA_API_URL + `/user/${pin}/token/`, {
-        withCredentials: false,
-        headers: {
-          "Cache-Control": "no-cache",
-          "Access-Control-Allow-Origin": "*",
-          'jwt-token': import.meta.env.VITE_PISA_API_TOKEN,
-        },
-      })
+  await axios(import.meta.env.VITE_PISA_API_URL + `/user/${pin}/token/`, {
+    method: 'GET',
+    mode: 'no-cors',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'jwt-token': import.meta.env.VITE_PISA_API_TOKEN,
+    },
+    withCredentials: true,
+    credentials: 'same-origin',
+  })
       .then(resp => {
         const token = resp.data?.token || ''
         if (token.startsWith('ey')) {
