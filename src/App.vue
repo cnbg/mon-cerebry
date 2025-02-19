@@ -1,47 +1,39 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { onBeforeMount } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useToast } from 'primevue/usetoast'
+import { useConfigStore } from '@/store'
+
+const {t} = useI18n()
+const toast = useToast()
+const config = useConfigStore()
+
+document.addEventListener('show-toast', function (e) {
+  toast.add({
+    severity: e.detail?.severity,
+    summary: t(e.detail?.summary),
+    detail: e.detail?.detail ? t(e.detail?.detail) : '',
+    life: e.detail?.life,
+  })
+})
+
+const dev = import.meta.env.DEV
+
+onBeforeMount(() => {
+  // config.syncWithServer()
+  config.sync()
+})
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <RouterView />
+  <Teleport to="body">
+    <Toast position="bottom-right" />
+    <ConfirmDialog />
+    <div v-if="dev" class="flex items-center gap-3 bottom-8 left-7 fixed z-50">
+      <SelectButton v-model="$i18n.locale" :allow-empty="false"
+                    :options="['kg', 'ru', 'en']" @change="config.setLocale($i18n.locale, false)" />
+      <ToggleSwitch v-model="config.darkMode" @change="config.toggleDarkMode()" />
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </Teleport>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>

@@ -1,6 +1,8 @@
-import './assets/main.css'
+import app from './primevue'
 
-import { createApp } from 'vue'
-import App from './App.vue'
+const dm = [true, 'true'].includes(localStorage.getItem('darkMode'))
 
-createApp(App).mount('#app')
+const html = document.querySelector('html')
+dm ? html.classList.add('p-dark') : html.classList.remove('p-dark')
+
+app.mount('#app')
