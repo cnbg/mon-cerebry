@@ -12,7 +12,7 @@ export const useConfigStore = defineStore('config', {
     ],
     locale: localStorage.getItem('locale') ?? 'kg',
     darkMode: localStorage.getItem('darkMode') ?? (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),
-    user: {},
+    user: null,
     pin: localStorage.getItem('pin') ?? '',
     token: localStorage.getItem('token') ?? '',
     loading: false,
@@ -25,7 +25,7 @@ export const useConfigStore = defineStore('config', {
     error: state => state.status === 'error',
   },
   actions: {
-    async sync(data = {}) {
+    async sync(data = null) {
       this.user = data
       await this.setPin(data?.pin)
       await this.setLocale(data?.locale)
@@ -42,7 +42,7 @@ export const useConfigStore = defineStore('config', {
           .then(resp => {
             if(resp.data?.resultCode === 0) {
               this.setSuccess({message: resp.data?.resultMessage}, false)
-              this.sync(resp.data.actionResult ?? {})
+              this.sync(resp.data?.actionResult ?? {})
             } else {
               this.setError({message: resp.data?.resultMessage})
               this.sync()
