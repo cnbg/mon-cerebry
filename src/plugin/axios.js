@@ -26,9 +26,10 @@ http.interceptors.response.use(
       let code = error.response.status
       let message = error.response.data?.message || error.response.statusText
 
-      if (code === 401 && !window.location.pathname.includes('/login')) {
+      const isLogin = window.location.pathname.includes('/login')
+      if (code === 401 && !isLogin) {
         windowTo('login')
-      } else {
+      } else if (!isLogin) {
         toastEvent('error', 'error', message, 6000)
       }
 
