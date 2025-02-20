@@ -40,7 +40,6 @@ export const useConfigStore = defineStore('config', {
       } else {
         await http.post('auth/profileStudent')
           .then(resp => {
-            console.log(resp.data.actionResult)
             if(resp.data?.resultCode === 0) {
               this.setSuccess({message: resp.data?.resultMessage}, false)
               this.sync(resp.data.actionResult ?? {})

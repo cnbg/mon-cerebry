@@ -21,20 +21,20 @@ const logout = () => {
     <div class="max-w-screen-sm card flex flex-col align-center mx-auto gap-8">
       <div class="flex justify-between items-center gap-5">
         <Avatar icon="pi pi-user" size="xlarge" />
-        <div class="font-bold lg:text-3xl text-xl">{{ user.last_name }} {{ user.first_name }}</div>
+        <div class="font-bold lg:text-3xl text-xl">{{ user?.last_name }} {{ user?.first_name }}</div>
         <Button icon="pi pi-sign-out" :label="$t('logout')" @click="logout" outlined severity="secondary" />
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <span class="w-32">{{ $t('grade') }}</span>
-        <span>{{ user.grade }}-{{ user.letter }}</span>
+        <span>{{ user?.grade }}-{{ user?.letter }}</span>
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <span class="w-32">{{ $t('email') }}</span>
-        <span>{{ isValidEmail(user.email) ? user.email : '-' }}</span>
+        <span>{{ isValidEmail(user?.email) ? user?.email : '-' }}</span>
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <span class="w-32">{{ $t('school') }}</span>
-        <span>{{ user.school.name }}</span>
+        <span>{{ user?.school?.name }}</span>
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <span class="w-32">{{ $t('night-mode') }}</span>
