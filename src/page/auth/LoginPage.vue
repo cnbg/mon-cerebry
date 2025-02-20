@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { focusElement, parseJwt } from '@/helper'
+import { focusElement } from '@/helper'
 import { useConfigStore } from '@/store'
 
 const router = useRouter()

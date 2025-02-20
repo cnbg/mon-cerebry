@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import http from '@/plugin/axios'
-import { parseJwt, toastEvent } from '@/helper'
+import { toastEvent } from '@/helper'
 import dayjs from 'dayjs'
 
 export const useConfigStore = defineStore('config', {
