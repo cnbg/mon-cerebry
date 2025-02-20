@@ -14,6 +14,11 @@ export default {
     'ru': 'Страница не найдена',
     'en': 'Page not found',
   },
+  'grade': {
+    'kg': 'Класс',
+    'ru': 'Класс',
+    'en': 'Grade',
+  },
   'login': {
     'kg': 'Кирүү',
     'ru': 'Войти',

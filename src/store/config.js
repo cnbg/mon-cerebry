@@ -21,6 +21,10 @@ export const useConfigStore = defineStore('config', {
     birthdate: localStorage.getItem('birthdate') ?? '',
     studentId: localStorage.getItem('studentid') ?? '',
     token: localStorage.getItem('token') ?? '',
+    okpo: localStorage.getItem('okpo') ?? '',
+    schoolName: localStorage.getItem('schoolname') ?? '',
+    grade: localStorage.getItem('grade') ?? '',
+    letter: localStorage.getItem('letter') ?? '',
     loading: false,
     status: '',
     message: '',
@@ -85,6 +89,10 @@ export const useConfigStore = defineStore('config', {
       this.phone = data?.phone ?? localStorage.getItem('phone') ?? this.phone
       this.birthdate = data?.birthdate ?? localStorage.getItem('birthdate') ?? this.birthdate
       this.studentId = data?.studentId ?? localStorage.getItem('studentid') ?? this.studentId
+      this.okpo = data?.okpo ?? localStorage.getItem('okpo') ?? this.okpo
+      this.schoolName = data?.school?.name ?? localStorage.getItem('schoolname') ?? this.schoolName
+      this.grade = data?.grade ?? localStorage.getItem('grade') ?? this.grade
+      this.letter = data?.letter ?? localStorage.getItem('letter') ?? this.letter
 
       await localStorage.setItem('pin', this.pin)
       await localStorage.setItem('firstname', this.firstName)
@@ -93,6 +101,10 @@ export const useConfigStore = defineStore('config', {
       await localStorage.setItem('phone', this.phone)
       await localStorage.setItem('birthdate', this.birthdate)
       await localStorage.setItem('studentid', this.studentId)
+      await localStorage.setItem('okpo', this.okpo)
+      await localStorage.setItem('schoolname', this.schoolName)
+      await localStorage.setItem('grade', this.grade)
+      await localStorage.setItem('letter', this.letter)
     },
     async clearProfile() {
       this.firstName = ''
@@ -101,6 +113,10 @@ export const useConfigStore = defineStore('config', {
       this.phone = ''
       this.birthdate = ''
       this.studentId = ''
+      this.okpo = ''
+      this.schoolName = ''
+      this.grade = ''
+      this.letter = ''
 
       await localStorage.setItem('firstname', '')
       await localStorage.setItem('lastname', '')
@@ -108,6 +124,10 @@ export const useConfigStore = defineStore('config', {
       await localStorage.setItem('phone', '')
       await localStorage.setItem('birthdate', '')
       await localStorage.setItem('studentid', '')
+      await localStorage.setItem('okpo', '')
+      await localStorage.setItem('schoolname', '')
+      await localStorage.setItem('grade', '')
+      await localStorage.setItem('letter', '')
     },
     async updateProfile(data) {
       this.loading = true

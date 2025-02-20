@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useConfigStore } from '@/store'
+import { isValidEmail } from '../../helper/index.js'
 
 const {t} = useI18n()
 const router = useRouter()
@@ -40,8 +41,16 @@ const logout = () => {
         <span>{{ config.lastName }} {{ config.firstName }}</span>
       </div>
       <div class="flex flex-wrap items-center gap-2">
+        <span class="w-32">{{ $t('grade') }}</span>
+        <span>{{ config.grade }}-{{ config.letter }}</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
         <span class="w-32">{{ $t('email') }}</span>
-        <span>{{ config.email }}</span>
+        <span>{{ isValidEmail(config.email) ? config.email : '-' }}</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="w-32">{{ $t('school') }}</span>
+        <span>{{ config.schoolName }}</span>
       </div>
     </div>
   </div>
