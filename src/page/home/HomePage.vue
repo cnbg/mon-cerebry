@@ -35,7 +35,8 @@ const cerebry = async () => {
 <template>
   <MainLayout>
     <ProfileComponent />
-    <div class="max-w-screen-sm card flex flex-col align-center mx-auto gap-8 mt-8">
+    <div class="max-w-screen-sm card flex flex-col align-center mx-auto gap-8 mt-8"
+         v-show="config.user?.studentId">
       <hr>
       <Button :label="$t('go-to-pisa-test')" @click="cerebry" outlined severity="contrast"
               icon="pi pi-external-link" :disabled="loading" />
