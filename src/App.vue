@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount } from 'vue'
+import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useToast } from 'primevue/usetoast'
 import { useConfigStore } from '@/store'
@@ -19,7 +19,7 @@ document.addEventListener('show-toast', function (e) {
 
 const dev = import.meta.env.DEV
 
-onBeforeMount(() => {
+onMounted(() => {
   config.syncWithServer()
 })
 </script>
