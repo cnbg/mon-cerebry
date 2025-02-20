@@ -180,9 +180,9 @@ export default {
     'en': 'You don\'t have access',
   },
   'go-to-pisa-test': {
-    'kg': 'PISA тестине өтүү',
-    'ru': 'Перейти на PISA тест',
-    'en': 'Go to PISA test',
+    'kg': 'PISA тестке өтүү',
+    'ru': 'Открыть PISA тест',
+    'en': 'Open PISA test',
   },
   'please-contact-your-teacher': {
     'kg': 'Мугалимиңизге кайрылыңыз',
