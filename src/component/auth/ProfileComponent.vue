@@ -1,5 +1,4 @@
 <script setup>
-import { onBeforeMount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useConfigStore } from '@/store'
@@ -17,7 +16,7 @@ const logout = () => {
 </script>
 
 <template>
-  <div>
+  <div v-if="config.user?.studentId?.lenght > 0">
     <div class="max-w-screen-sm card flex flex-col align-center mx-auto gap-8">
       <div class="flex justify-between items-center gap-5">
         <Avatar icon="pi pi-user" size="xlarge" />
