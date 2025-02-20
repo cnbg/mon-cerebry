@@ -19,8 +19,8 @@ document.addEventListener('show-toast', function (e) {
 
 const dev = import.meta.env.DEV
 
-onMounted(() => {
-  config.syncWithServer()
+onMounted(async () => {
+  await config.syncWithServer()
 })
 </script>
 
