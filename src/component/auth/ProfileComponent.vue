@@ -16,7 +16,7 @@ const logout = () => {
 </script>
 
 <template>
-  <div v-if="config.user?.studentId?.lenght > 0">
+  <div v-show="config.user?.studentId">
     <div class="max-w-screen-sm card flex flex-col align-center mx-auto gap-8">
       <div class="flex justify-between items-center gap-5">
         <Avatar icon="pi pi-user" size="xlarge" />
