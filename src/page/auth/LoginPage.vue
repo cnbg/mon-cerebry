@@ -1,14 +1,14 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { focusElement } from '@/helper'
+import { focusElement, parseJwt } from '@/helper'
 import { useConfigStore } from '@/store'
 
 const router = useRouter()
 const config = useConfigStore()
 config.logout()
 
-const username = ref(config.pin)
+const username = ref(config.pin || '')
 const password = ref('')
 
 const login = async () => {

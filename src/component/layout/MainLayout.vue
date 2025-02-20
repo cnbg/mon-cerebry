@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2 overflow-hidden">
+  <div class="p-4 overflow-hidden">
     <slot />
   </div>
 </template>

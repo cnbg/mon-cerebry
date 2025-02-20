@@ -20,8 +20,7 @@ document.addEventListener('show-toast', function (e) {
 const dev = import.meta.env.DEV
 
 onBeforeMount(() => {
-  // config.syncWithServer()
-  config.sync()
+  config.syncWithServer()
 })
 </script>
 

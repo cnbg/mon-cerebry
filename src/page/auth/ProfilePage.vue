@@ -5,7 +5,7 @@ import ProfileComponent from '@/component/auth/ProfileComponent.vue'
 
 <template>
   <MainLayout>
-    <ProfileComponent class="mt-4" />
+    <ProfileComponent />
   </MainLayout>
 </template>
 

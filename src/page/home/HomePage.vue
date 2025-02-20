@@ -11,7 +11,7 @@ const loading = ref(false)
 
 const cerebry = async () => {
   loading.value = true
-  await axios.get(import.meta.env.VITE_PISA_API_URL + `/cerebry/${config.studentId}`, {
+  await axios.get(import.meta.env.VITE_PISA_API_URL + `/cerebry/${config.user.studentId}`, {
         headers: {
           'Content-Type': 'application/json',
           'jwt-token': import.meta.env.VITE_PISA_API_TOKEN,
@@ -19,7 +19,7 @@ const cerebry = async () => {
       })
       .then(resp => {
         const token = resp.data?.token || ''
-        if (token.startsWith('ey')) {
+        if(token.startsWith('ey')) {
           window.location.replace('https://student.cerebry.co/?auth_tok=' + token)
         } else {
           toastEvent('error', 'dont-have-access', 'please-contact-your-teacher', 6000)
@@ -34,7 +34,7 @@ const cerebry = async () => {
 
 <template>
   <MainLayout>
-    <ProfileComponent class="mt-4" />
+    <ProfileComponent />
     <div class="max-w-screen-sm card flex flex-col align-center mx-auto gap-8 mt-8">
       <hr>
       <Button :label="$t('go-to-pisa-test')" @click="cerebry" outlined severity="contrast"
