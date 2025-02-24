@@ -1,16 +1,14 @@
 <script setup>
-import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useConfigStore } from '@/store'
-import { isValidEmail } from '@/helper'
+import { isValidEmail, windowTo } from '@/helper'
 
 const {t} = useI18n()
-const router = useRouter()
 const config = useConfigStore()
 
 const logout = () => {
-  if(confirm(t('are-you-sure'))) {
-    router.push({name: 'login'})
+  if (confirm(t('are-you-sure'))) {
+    windowTo('login')
   }
 }
 </script>
