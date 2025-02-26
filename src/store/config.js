@@ -33,14 +33,14 @@ export const useConfigStore = defineStore('config', {
     },
     async syncWithServer() {
       this.loading = true
-      if(window.location.pathname.includes('/login')) {
+      if (window.location.pathname.includes('/login')) {
         await this.sync()
         await this.logout()
         this.loading = false
       } else {
         await http.post('auth/profileStudent')
           .then(resp => {
-            if(resp.data?.resultCode === 0) {
+            if (resp.data?.resultCode === 0) {
               this.setSuccess({message: resp.data?.resultMessage}, false)
               this.sync(resp.data?.actionResult ?? {})
             } else {
@@ -60,7 +60,7 @@ export const useConfigStore = defineStore('config', {
       this.locale = locale ?? localStorage.getItem('locale') ?? this.locale
       await localStorage.setItem('locale', this.locale)
 
-      if(sync) await this.updateProfile({locale: this.locale})
+      if (sync) await this.updateProfile({locale: this.locale})
     },
     async toggleDarkMode() {
       await this.setDarkMode(this.darkMode)
@@ -91,24 +91,24 @@ export const useConfigStore = defineStore('config', {
     },
     async login(username, password, device = 'web') {
       username = username.replace(/\D/g, '')
-      if(username.length !== 14 || !['1', '2'].includes(username[0])) {
+      if (username.length !== 14 || !['1', '2'].includes(username[0])) {
         this.setError({message: 'check-pin-validity'})
         return
       }
-      if(password.length < 5) {
+      if (password.length < 5) {
         this.setError({message: 'password-length-min'})
         return
       }
       this.loading = true
-      await http.post('auth/loginStudent', {
+      await http.post('auth/loginStudentAis', {
           username: username,
           password: password,
           device: device,
         })
         .then(resp => {
-          if(resp.data?.token?.startsWith('ey')) {
+          if (resp.data?.token?.startsWith('ey')) {
             const date = dayjs(resp.data?.birthdate)
-            if(date.year() === 2009) {
+            if (date.year() === 2009) {
               this.setSuccess(resp.data, false)
               this.setToken(resp.data?.token)
               this.sync(resp.data || {})
@@ -133,13 +133,13 @@ export const useConfigStore = defineStore('config', {
       this.status = 'success'
       this.message = resp.message || 'action-successful'
       this.errors = {}
-      if(toast) {
+      if (toast) {
         toastEvent('success', this.message)
       }
     },
     setError(resp) {
       this.status = 'error'
-      this.message = resp.message || 'error'
+      this.message = resp.message || resp.error || 'error'
       this.errors = resp.errors || {}
     },
   },

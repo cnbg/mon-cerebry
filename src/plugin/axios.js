@@ -24,7 +24,7 @@ http.interceptors.response.use(
     }
     if (error.response) {
       let code = error.response.status
-      let message = error.response.data?.message || error.response.statusText
+      let message = error.response.data?.message || error.response.data?.error || error.response.statusText
 
       const isLogin = window.location.pathname.includes('/login')
       if (code === 401 && !isLogin) {
