@@ -108,7 +108,7 @@ export const useConfigStore = defineStore('config', {
         .then(resp => {
           if (resp.data?.token?.startsWith('ey')) {
             const date = dayjs(resp.data?.birthdate)
-            if (date.year() === 2009) {
+            if (date.year() === 2009 || this.pin.substring(5, 9) === '2009') {
               this.setSuccess(resp.data, false)
               this.setToken(resp.data?.token)
               this.sync(resp.data || {})
