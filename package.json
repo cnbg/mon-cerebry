@@ -9,12 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@primevue/themes": "^4.3",
+    "@primeuix/themes": "^1.0",
     "axios": "^1.8",
     "dayjs": "^1.11",
     "pinia": "^3.0",
     "primeicons": "^7.0",
     "primevue": "^4.3",
+    "tailwindcss-primeui": "^0.5",
     "vue": "^3.5",
     "vue-i18n": "^11.1",
     "vue-router": "^4.5"
