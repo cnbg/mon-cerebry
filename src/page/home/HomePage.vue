@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { toastEvent } from '@/helper'
 import { useConfigStore } from '@/store'
+import { demoUserInfo } from '@/store/config'
 import MainLayout from '@/component/layout/MainLayout.vue'
 import ProfileComponent from '@/component/auth/ProfileComponent.vue'
 
@@ -34,6 +35,11 @@ const cerebry = async () => {
 
 <template>
   <MainLayout>
+    <Message severity="warn"
+              v-if="config.pin === demoUserInfo.info?.pin"
+             class="max-w-screen-sm card flex flex-col align-center mx-auto gap-8 mt-1 mb-5">
+      {{ $t('demo-mode') }}
+    </Message>
     <ProfileComponent />
     <div class="max-w-screen-sm card flex flex-col align-center mx-auto gap-8 mt-8"
          v-show="config.user?.studentId">

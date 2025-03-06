@@ -3,8 +3,11 @@ export function focusElement(elementId) {
 }
 
 export function parseDate(date, defaultValue = '') {
-  const d = new Date(date)
-  return d instanceof Date && !isNaN(d) ? d.toLocaleDateString() : defaultValue
+  try {
+    return (new Date(date)).toLocaleDateString()
+  } catch (error) {
+    return defaultValue
+  }
 }
 
 export function hasError(errors, attr) {
@@ -23,11 +26,11 @@ export function windowTo(path) {
   window.location.href = path.startsWith('/') ? path : `/${path}`
 }
 
-export function parseJwt (token) {
+export function parseJwt(token) {
   try {
     const base64Url = token.split('.')[1]
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+    const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 

@@ -1,7 +1,25 @@
 import { defineStore } from 'pinia'
 import http from '@/plugin/axios'
-import { toastEvent } from '@/helper'
+import { toastEvent, windowTo } from '@/helper'
 import dayjs from 'dayjs'
+
+const demoUser = {
+  studentId: 'testokuuchu10',
+  first_name: 'Тест окуучу',
+  last_name: '.',
+  email: 'okuuchu10@test.com',
+  school: {
+    name: 'Тест мектеп',
+  },
+  grade: 9,
+  letter: 'А',
+  pin: '20101200913579',
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+}
+
+export const demoUserInfo = {
+  info: demoUser
+}
 
 export const useConfigStore = defineStore('config', {
   state: () => ({
@@ -38,6 +56,14 @@ export const useConfigStore = defineStore('config', {
         await this.logout()
         this.loading = false
       } else {
+        if (this.token?.trim() === '') {
+          windowTo('login')
+        }
+        // TODO: remove if demo login is not needed
+        if (this.pin === demoUser.pin) {
+          await this.demoLogin()
+          return
+        }
         await http.post('auth/profileStudent')
           .then(resp => {
             if (resp.data?.resultCode === 0) {
@@ -51,6 +77,13 @@ export const useConfigStore = defineStore('config', {
           .catch(err => this.sync())
           .finally(() => this.loading = false)
       }
+    },
+    async demoLogin() {
+      this.loading = true
+      this.setSuccess({message: 'demo-login-successful'}, false)
+      await this.setToken(demoUser.token)
+      await this.sync(demoUser)
+      this.loading = false
     },
     async setPin(pin = null) {
       this.pin = pin ?? localStorage.getItem('pin') ?? this.pin
@@ -97,6 +130,14 @@ export const useConfigStore = defineStore('config', {
       }
       if (password.length < 5) {
         this.setError({message: 'password-length-min'})
+        return
+      }
+      // TODO: remove if demo login is not needed
+      const dp = demoUser.pin
+      const l = dp.length
+      console.log(username === dp)
+      if (username === dp && password === dp.substring(l - 5)) {
+        await this.demoLogin()
         return
       }
       this.loading = true

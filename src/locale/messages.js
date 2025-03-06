@@ -188,5 +188,10 @@ export default {
     'kg': 'Мугалимиңизге кайрылыңыз',
     'ru': 'Пожалуйста, свяжитесь с вашим учителем',
     'en': 'Please, contact your teacher',
-  }
+  },
+  'demo-mode': {
+    'kg': 'Демо режим',
+    'ru': 'Демо режим',
+    'en': 'Demo mode',
+  },
 }
